@@ -27,7 +27,6 @@
             box-shadow: 0 10px 25px rgba(181, 131, 141, 0.2);
             border: 4px solid #ffcad4;
         }
-        /* THANH HEADER TRẠNG THÁI */
         .status-header {
             background: linear-gradient(135deg, #ff9aa2, #ffb7b2);
             padding: 10px 16px;
@@ -46,8 +45,6 @@
             align-items: center;
             gap: 4px;
         }
-
-        /* KHUNG KHÁCH ORDER */
         .order-bubble {
             background: #ffffff;
             border: 3px solid #ffb7b2;
@@ -55,7 +52,6 @@
             border-radius: 18px;
             margin-bottom: 14px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            position: relative;
         }
         .customer-title {
             color: #b5838d;
@@ -69,8 +65,6 @@
             line-height: 1.4;
             margin: 0;
         }
-
-        /* TIÊU ĐỀ CÁC TRẠM */
         .station-title {
             background: linear-gradient(90deg, #b5838d, #e5989b);
             color: white;
@@ -82,8 +76,6 @@
             display: inline-block;
             box-shadow: 0 2px 6px rgba(181, 131, 141, 0.2);
         }
-
-        /* KHUNG Ô SELECT ĐÔI & BA */
         .select-row {
             display: flex;
             gap: 8px;
@@ -100,10 +92,7 @@
             font-size: 12px;
             outline: none;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
-
-        /* BẢNG 12 Ô LƯỚI TOPPING CÓ HÌNH ẢNH MINH HỌA */
         .topping-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -117,8 +106,8 @@
         .topping-card {
             background: #ffffff;
             border: 2px solid #ffcad4;
-            border-radius: 14px;
-            padding: 6px 2px;
+            border-radius: 12px;
+            padding: 8px 2px;
             text-align: center;
             font-size: 10px;
             font-weight: 700;
@@ -130,13 +119,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 4px;
+            gap: 2px;
         }
-        .topping-card img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
+        .topping-card span.icon {
+            font-size: 20px;
         }
         .topping-card:hover {
             transform: translateY(-2px);
@@ -148,8 +134,6 @@
             box-shadow: 0 4px 10px rgba(229, 152, 155, 0.4);
             transform: scale(1.04);
         }
-
-        /* NÚT GIAO TRÀ */
         .btn-deliver {
             background: linear-gradient(135deg, #ff9aa2, #b5838d);
             color: white;
@@ -162,13 +146,10 @@
             cursor: pointer;
             margin-top: 10px;
             box-shadow: 0 6px 15px rgba(181, 131, 141, 0.4);
-            transition: all 0.2s;
         }
         .btn-deliver:active {
             transform: scale(0.98);
         }
-
-        /* THÔNG BÁO */
         #result-status {
             text-align: center;
             font-weight: 800;
@@ -181,20 +162,17 @@
 <body>
 
     <div class="game-card">
-        <!-- THANH TRẠNG THÁI -->
         <div class="status-header">
             <div class="status-item">📅 Ngày 28</div>
             <div class="status-item">💰 <span id="money-val">856.8</span>k đ</div>
             <div class="status-item">⭐ 4.7</div>
         </div>
 
-        <!-- BONG BÓNG KHÁCH ĐẶT MÓN -->
         <div class="order-bubble">
             <div class="customer-title" id="cust-name">👧 Khách hàng đang chọn món...</div>
             <p class="order-desc" id="cust-order">Đang tải công thức...</p>
         </div>
 
-        <!-- TRẠM 1: TRÀ & SIZE -->
         <div class="station-title">🧋 1. CHỌN VÒI TRÀ & SIZE</div>
         <div class="select-row">
             <select id="select-tea">
@@ -211,17 +189,13 @@
             </select>
         </div>
 
-        <!-- TRẠM 2: 12 Ô LƯỚI TOPPING CÓ HÌNH MÔ PHỎNG -->
         <div class="station-title">🍮 2. KHAY TOPPING (12 Ô LƯỚI)</div>
-        <div class="topping-grid" id="grid-container">
-            <!-- 12 Ô Topping kèm Icon/Hình ảnh tự động tạo từ JavaScript -->
-        </div>
+        <div class="topping-grid" id="grid-container"></div>
 
-        <!-- TRẠM 3: FOAM, ĐÁ & ĐƯỜNG -->
         <div class="station-title">🥛 3. FOAM, ĐÁ & ĐƯỜNG</div>
         <div class="select-row">
             <select id="select-foam">
-                <option value="Không">Chưa chọn Foam</option>
+                <option value="Không">Không Foam</option>
                 <option value="Foam cheese">🧀 Foam cheese</option>
                 <option value="Foam matcha">🍵 Foam matcha</option>
                 <option value="Foam muối">🧂 Foam muối</option>
@@ -238,38 +212,35 @@
             </select>
         </div>
 
-        <!-- NÚT HOÀN THÀNH -->
         <button class="btn-deliver" onclick="checkDrinkOrder()">🚀 GIAO LY TRÀ CHO KHÁCH</button>
         <div id="result-status"></div>
     </div>
 
     <script>
-        // Danh sách 12 topping kèm biểu tượng/icon hình ảnh sinh động
         const toppingData = [
-            { name: "Trân châu đen", img: "https://cdn-icons-png.flaticon.com/512/3081/3081986.png" },
-            { name: "Tàu hủ đen", img: "https://cdn-icons-png.flaticon.com/512/2515/2515183.png" },
-            { name: "Jellien", img: "https://cdn-icons-png.flaticon.com/512/3571/3571612.png" },
-            { name: "Hếti", img: "https://cdn-icons-png.flaticon.com/512/3081/3081925.png" },
-            { name: "Jăn chiến", img: "https://cdn-icons-png.flaticon.com/512/1046/1046784.png" },
-            { name: "Thái", img: "https://cdn-icons-png.flaticon.com/512/2921/2921822.png" },
-            { name: "Bình tường", img: "https://cdn-icons-png.flaticon.com/512/3132/3132693.png" },
-            { name: "Đuôn", img: "https://cdn-icons-png.flaticon.com/512/2480/2480822.png" },
-            { name: "Pudding trứng", img: "https://cdn-icons-png.flaticon.com/512/2276/2276931.png" },
-            { name: "Thạch matcha", img: "https://cdn-icons-png.flaticon.com/512/3050/3050122.png" },
-            { name: "Trân châu vàng", img: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png" },
-            { name: "Khoai dẻo", img: "https://cdn-icons-png.flaticon.com/512/1135/1135058.png" }
+            { name: "Trân châu đen", icon: "🧋" },
+            { name: "Tàu hủ đen", icon: "🍮" },
+            { name: "Jellien", icon: "🍡" },
+            { name: "Hếti", icon: "🍯" },
+            { name: "Jăn chiến", icon: "🍩" },
+            { name: "Thái", icon: "🍧" },
+            { name: "Bình tường", icon: "🧊" },
+            { name: "Đuôn", icon: "🥥" },
+            { name: "Pudding trứng", icon: "🍮" },
+            { name: "Thạch matcha", icon: "🍵" },
+            { name: "Trân châu vàng", icon: "🟡" },
+            { name: "Khoai dẻo", icon: "🍠" }
         ];
 
         let currentOrder = {};
         let activeTopping = "";
         let currentMoney = 856.8;
 
-        // Render 12 ô topping dạng lưới với Icon hình ảnh
         const grid = document.getElementById("grid-container");
         toppingData.forEach(top => {
             const card = document.createElement("div");
             card.className = "topping-card";
-            card.innerHTML = `<img src="${top.img}" alt="${top.name}"><span>${top.name}</span>`;
+            card.innerHTML = `<span class="icon">${top.icon}</span><span>${top.name}</span>`;
             card.onclick = () => {
                 document.querySelectorAll(".topping-card").forEach(c => c.classList.remove("active"));
                 card.classList.add("active");
@@ -278,7 +249,6 @@
             grid.appendChild(card);
         });
 
-        // Tạo đơn hàng ngẫu nhiên
         function createRandomOrder() {
             const customers = ["Bé Na 👧", "Minh Quân 👦", "Hà An 👩", "Gia Hân 🌸", "Tuấn Khải ☕"];
             const sizes = ["Size M", "Size L"];
@@ -305,7 +275,6 @@
                 `"Cho mình 1 ly <b>${currentOrder.tea}</b> (${currentOrder.size}), topping <b>${currentOrder.topping}</b>, <b>${currentOrder.foam}</b>, <b>${currentOrder.sugar}</b> và <b>${currentOrder.ice}</b> nha!"`;
         }
 
-        // Kiểm tra và giao trà
         function checkDrinkOrder() {
             const userTea = document.getElementById("select-tea").value;
             const userSize = document.getElementById("select-size").value;
@@ -325,7 +294,7 @@
                 currentMoney += currentOrder.reward / 1000;
                 document.getElementById("money-val").innerText = currentMoney.toFixed(1);
                 statusEl.style.color = "#2a9d8f";
-                statusEl.innerText = `🎉 Pha đúng rồi! Bạn nhận được +${currentOrder.reward}k đ`;
+                statusEl.innerText = `🎉 Pha đúng rồi! Nhận +${currentOrder.reward}k đ`;
                 setTimeout(() => {
                     statusEl.innerText = "";
                     createRandomOrder();
