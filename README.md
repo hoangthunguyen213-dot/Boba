@@ -3,30 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiệm Trà Nhỏ - Boba Master</title>
+    <title>Tiệm Trà Nhỏ - Boba Game</title>
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: #f7ebe1;
+            font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 12px;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fceade;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 12px;
         }
+
         .game-card {
             width: 100%;
             max-width: 420px;
-            background: #fffdf9;
+            background: #ffffff;
             border-radius: 24px;
             padding: 16px;
-            box-shadow: 0 10px 25px rgba(181, 131, 141, 0.2);
+            box-shadow: 0 12px 30px rgba(181, 131, 141, 0.25);
             border: 4px solid #ffcad4;
         }
+
+        /* THANH HEADER TRẠNG THÁI */
         .status-header {
             background: linear-gradient(135deg, #ff9aa2, #ffb7b2);
             padding: 10px 16px;
@@ -38,144 +43,219 @@
             align-items: center;
             font-size: 14px;
             box-shadow: 0 4px 10px rgba(255, 154, 162, 0.4);
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+
+        /* KHUNG KHÁCH ORDER */
         .order-bubble {
-            background: #ffffff;
-            border: 3px solid #ffb7b2;
-            padding: 12px 14px;
-            border-radius: 18px;
-            margin-bottom: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            background: #fffaf5;
+            border: 2px solid #ffb7b2;
+            padding: 10px 14px;
+            border-radius: 16px;
+            margin-bottom: 12px;
         }
+
         .customer-title {
             color: #b5838d;
             font-weight: 800;
-            font-size: 14px;
-            margin-bottom: 4px;
+            font-size: 13px;
+            margin-bottom: 2px;
         }
+
         .order-desc {
             color: #5d4037;
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.4;
-            margin: 0;
         }
+
+        /* KHUNG LY TRÀ MÔ PHỎNG */
+        .preview-box {
+            background: #fff5f5;
+            border: 2px dashed #ffcad4;
+            border-radius: 16px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 12px;
+            height: 140px;
+        }
+
+        .cup-container {
+            width: 80px;
+            height: 110px;
+            border: 3px solid #5d4037;
+            border-top: none;
+            border-radius: 0 0 16px 16px;
+            position: relative;
+            background: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .cup-straw {
+            position: absolute;
+            top: -15px;
+            right: 25px;
+            width: 10px;
+            height: 120px;
+            background: #ff9aa2;
+            z-index: 10;
+            border-radius: 4px;
+        }
+
+        .cup-foam {
+            height: 20px;
+            background: #fff;
+            width: 100%;
+            border-bottom: 2px solid #e0e0e0;
+            display: none;
+        }
+
+        .cup-tea {
+            width: 100%;
+            height: 70%;
+            background: #d4a373;
+            transition: background 0.3s;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 5px;
+        }
+
+        .cup-topping {
+            font-size: 18px;
+        }
+
+        /* TIÊU ĐỀ TRẠM */
         .station-title {
             background: linear-gradient(90deg, #b5838d, #e5989b);
             color: white;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 11px;
             font-weight: 800;
-            margin: 12px 0 8px 0;
+            margin: 8px 0 6px 0;
             display: inline-block;
-            box-shadow: 0 2px 6px rgba(181, 131, 141, 0.2);
         }
+
+        /* CHỌN OPTION */
         .select-row {
             display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
+            gap: 6px;
+            margin-bottom: 8px;
         }
+
         select {
             flex: 1;
-            padding: 8px 10px;
-            border-radius: 12px;
+            padding: 6px 8px;
+            border-radius: 10px;
             border: 2px solid #ffcad4;
             background: #fffaf5;
             font-weight: 700;
             color: #6d597a;
-            font-size: 12px;
+            font-size: 11px;
             outline: none;
-            cursor: pointer;
         }
+
+        /* KHAY 12 TOPPING */
         .topping-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 12px;
+            gap: 6px;
+            margin-bottom: 8px;
             background: #fff5f5;
-            padding: 10px;
-            border-radius: 16px;
+            padding: 8px;
+            border-radius: 14px;
             border: 2px dashed #ffb7b2;
         }
+
         .topping-card {
             background: #ffffff;
             border: 2px solid #ffcad4;
-            border-radius: 12px;
-            padding: 8px 2px;
+            border-radius: 10px;
+            padding: 6px 2px;
             text-align: center;
             font-size: 10px;
             font-weight: 700;
             color: #5d4037;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.03);
             user-select: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2px;
         }
-        .topping-card span.icon {
-            font-size: 20px;
+
+        .topping-card .icon {
+            font-size: 18px;
         }
-        .topping-card:hover {
-            transform: translateY(-2px);
-        }
+
         .topping-card.active {
             background: linear-gradient(135deg, #ff9aa2, #e5989b);
             color: white;
             border-color: #b5838d;
-            box-shadow: 0 4px 10px rgba(229, 152, 155, 0.4);
-            transform: scale(1.04);
+            transform: scale(1.05);
         }
+
+        /* NÚT GIAO TRÀ */
         .btn-deliver {
             background: linear-gradient(135deg, #ff9aa2, #b5838d);
             color: white;
             border: none;
             width: 100%;
-            padding: 14px;
-            border-radius: 16px;
+            padding: 12px;
+            border-radius: 14px;
             font-weight: 800;
-            font-size: 15px;
+            font-size: 14px;
             cursor: pointer;
-            margin-top: 10px;
-            box-shadow: 0 6px 15px rgba(181, 131, 141, 0.4);
+            margin-top: 6px;
+            box-shadow: 0 4px 12px rgba(181, 131, 141, 0.3);
         }
-        .btn-deliver:active {
-            transform: scale(0.98);
-        }
+
         #result-status {
             text-align: center;
             font-weight: 800;
-            margin-top: 10px;
-            font-size: 13px;
-            min-height: 20px;
+            margin-top: 8px;
+            font-size: 12px;
+            min-height: 18px;
         }
     </style>
 </head>
 <body>
 
     <div class="game-card">
+        <!-- HEADER -->
         <div class="status-header">
-            <div class="status-item">📅 Ngày 28</div>
-            <div class="status-item">💰 <span id="money-val">856.8</span>k đ</div>
-            <div class="status-item">⭐ 4.7</div>
+            <div>📅 Ngày 28</div>
+            <div>💰 <span id="money-val">856.8</span>k đ</div>
+            <div>⭐ 4.7</div>
         </div>
 
+        <!-- KHÁCH ORDER -->
         <div class="order-bubble">
-            <div class="customer-title" id="cust-name">👧 Khách hàng đang chọn món...</div>
-            <p class="order-desc" id="cust-order">Đang tải công thức...</p>
+            <div class="customer-title" id="cust-name">👧 Khách đang chọn món...</div>
+            <div class="order-desc" id="cust-order">Đang tải công thức...</div>
         </div>
 
-        <div class="station-title">🧋 1. CHỌN VÒI TRÀ & SIZE</div>
+        <!-- LY TRÀ MÔ PHỎNG -->
+        <div class="preview-box">
+            <div class="cup-container">
+                <div class="cup-straw"></div>
+                <div class="cup-foam" id="cup-foam-layer"></div>
+                <div class="cup-tea" id="cup-tea-layer">
+                    <span class="cup-topping" id="cup-topping-layer"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRẠM 1: CHỌN TRÀ & SIZE -->
+        <div class="station-title">🧋 1. CHỌN TRÀ & SIZE</div>
         <div class="select-row">
-            <select id="select-tea">
+            <select id="select-tea" onchange="updatePreview()">
                 <option value="Trà sữa">🧋 Trà sữa</option>
                 <option value="Matcha">🍵 Matcha</option>
                 <option value="Hồng trà">🫖 Hồng trà</option>
@@ -189,13 +269,15 @@
             </select>
         </div>
 
+        <!-- TRẠM 2: 12 Ô TOPPING -->
         <div class="station-title">🍮 2. KHAY TOPPING (12 Ô LƯỚI)</div>
         <div class="topping-grid" id="grid-container"></div>
 
+        <!-- TRẠM 3: FOAM, ĐÁ & ĐƯỜNG -->
         <div class="station-title">🥛 3. FOAM, ĐÁ & ĐƯỜNG</div>
         <div class="select-row">
-            <select id="select-foam">
-                <option value="Không">Không Foam</option>
+            <select id="select-foam" onchange="updatePreview()">
+                <option value="Không">Chưa chọn Foam</option>
                 <option value="Foam cheese">🧀 Foam cheese</option>
                 <option value="Foam matcha">🍵 Foam matcha</option>
                 <option value="Foam muối">🧂 Foam muối</option>
@@ -226,14 +308,24 @@
             { name: "Thái", icon: "🍧" },
             { name: "Bình tường", icon: "🧊" },
             { name: "Đuôn", icon: "🥥" },
-            { name: "Pudding trứng", icon: "🍮" },
+            { name: "Pudding trứng", icon: "🟡" },
             { name: "Thạch matcha", icon: "🍵" },
-            { name: "Trân châu vàng", icon: "🟡" },
+            { name: "Trân châu vàng", icon: "⭐" },
             { name: "Khoai dẻo", icon: "🍠" }
         ];
 
+        const teaColors = {
+            "Trà sữa": "#d4a373",
+            "Matcha": "#a3b18a",
+            "Hồng trà": "#bc6c25",
+            "Lục trà": "#ccd5ae",
+            "Oolong": "#ddb892",
+            "Trà thái": "#ffb703"
+        };
+
         let currentOrder = {};
         let activeTopping = "";
+        let activeToppingIcon = "";
         let currentMoney = 856.8;
 
         const grid = document.getElementById("grid-container");
@@ -245,9 +337,27 @@
                 document.querySelectorAll(".topping-card").forEach(c => c.classList.remove("active"));
                 card.classList.add("active");
                 activeTopping = top.name;
+                activeToppingIcon = top.icon;
+                updatePreview();
             };
             grid.appendChild(card);
         });
+
+        function updatePreview() {
+            const teaVal = document.getElementById("select-tea").value;
+            const foamVal = document.getElementById("select-foam").value;
+            
+            document.getElementById("cup-tea-layer").style.background = teaColors[teaVal] || "#d4a373";
+            document.getElementById("cup-topping-layer").innerText = activeToppingIcon;
+
+            const foamLayer = document.getElementById("cup-foam-layer");
+            if (foamVal !== "Không" && foamVal !== "Chưa chọn Foam") {
+                foamLayer.style.display = "block";
+                foamLayer.style.background = foamVal === "Foam matcha" ? "#e9edc9" : "#ffffff";
+            } else {
+                foamLayer.style.display = "none";
+            }
+        }
 
         function createRandomOrder() {
             const customers = ["Bé Na 👧", "Minh Quân 👦", "Hà An 👩", "Gia Hân 🌸", "Tuấn Khải ☕"];
@@ -294,7 +404,7 @@
                 currentMoney += currentOrder.reward / 1000;
                 document.getElementById("money-val").innerText = currentMoney.toFixed(1);
                 statusEl.style.color = "#2a9d8f";
-                statusEl.innerText = `🎉 Pha đúng rồi! Nhận +${currentOrder.reward}k đ`;
+                statusEl.innerText = `🎉 Pha đúng rồi! Bạn nhận được +${currentOrder.reward}k đ`;
                 setTimeout(() => {
                     statusEl.innerText = "";
                     createRandomOrder();
@@ -306,6 +416,7 @@
         }
 
         createRandomOrder();
+        updatePreview();
     </script>
 </body>
 </html>
